@@ -26,6 +26,16 @@ async function startServer() {
   app.use(express.json());
 
   // API Routes
+  app.post("/api/login", (req, res) => {
+    const { password } = req.body;
+    // Hardcoded password for demo purposes
+    if (password === "admin123") {
+      res.json({ success: true, token: "demo-token-123" });
+    } else {
+      res.status(401).json({ error: "Invalid password" });
+    }
+  });
+
   app.post("/api/log-generation", (req, res) => {
     const { photoName, bannerType } = req.body;
     try {
